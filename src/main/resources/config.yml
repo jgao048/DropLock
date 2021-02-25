@@ -1,0 +1,4 @@
+item-locked-already: "&eThis item is already locked to this slot"
+item-locked-success: "&eYou have successfully locked your item to this slot"
+item-unlocked-already: "&eThis item is already unlocked and can be moved"
+item-unlocked-success: "&eYou have successfully unlocked this item from this slot"

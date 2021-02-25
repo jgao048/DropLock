@@ -1,0 +1,9 @@
+name: DropLock
+version: ${project.version}
+main: dev.failures.main.DropLock
+api-version: 1.16
+commands:
+  lock:
+    description: Locks item to the inventory slot.
+  unlock:
+    description: Unlocks item to allow moving around.

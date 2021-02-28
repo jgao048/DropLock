@@ -22,9 +22,8 @@ public class ItemPickListener implements Listener {
 
         PDUtil itemOwner = new PDUtil(DataKeys.ITEM_OWNER);
         ItemStack pickedItem = e.getItem().getItemStack();
-        if(itemOwner.getItemDataString(pickedItem).equals(e.getEntity().getUniqueId().toString())) {
-            return;
-        }
+        if(!itemOwner.itemDataContainsKey(pickedItem)) return;
+        if(itemOwner.getItemDataString(pickedItem).equals(e.getEntity().getUniqueId().toString())) return;
         e.setCancelled(true);
     }
 }

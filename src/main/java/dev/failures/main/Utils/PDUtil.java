@@ -229,12 +229,10 @@ public class PDUtil {
     }
 
     public String getItemDataString(ItemStack item) {
-        String value = null;
-        if (!item.hasItemMeta()) return null;
+        String value = "";
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer ItemData = meta.getPersistentDataContainer();
-        if (ItemData.has(key, PersistentDataType.STRING))
-            value = ItemData.get(key, PersistentDataType.STRING);
+        if (ItemData.has(key, PersistentDataType.STRING)) value = ItemData.get(key, PersistentDataType.STRING);
         return value;
     }
 

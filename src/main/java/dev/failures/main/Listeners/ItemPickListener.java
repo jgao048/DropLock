@@ -21,12 +21,7 @@ public class ItemPickListener implements Listener {
         if(!(e.getEntity() instanceof Player)) return;
 
         PDUtil itemOwner = new PDUtil(DataKeys.ITEM_OWNER);
-        PDUtil itemTimer = new PDUtil(DataKeys.ITEM_TIMER);
-
         ItemStack pickedItem = e.getItem().getItemStack();
-        if(itemTimer.getItemDataInteger(pickedItem) == 0) {
-            return;
-        }
         if(itemOwner.getItemDataString(pickedItem).equals(e.getEntity().getUniqueId().toString())) {
             return;
         }

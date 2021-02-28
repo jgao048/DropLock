@@ -27,14 +27,14 @@ public class LockItemCommand implements CommandExecutor {
         if(p.getInventory().getItemInMainHand().getType() == Material.AIR) return false;
 
         ItemStack itemHand = p.getInventory().getItemInMainHand().clone();
-        PDUtil lockedSlot = new PDUtil(DataKeys.lockedSlot);
+        PDUtil itemOwner = new PDUtil(DataKeys.ITEM_OWNER);
 
-        if(lockedSlot.itemDataContainsKey(itemHand)) {
+        if(itemOwner.itemDataContainsKey(itemHand)) {
             p.sendMessage(ColorUtil.colorize(main.getConfig().getString("item-locked-already")));
             return true;
         }
         p.sendMessage(ColorUtil.colorize(main.getConfig().getString("item-locked-success")));
-        lockedSlot.setItemDataInteger(itemHand,p.getInventory().getHeldItemSlot());
+        itemOwner.setItemDataString(itemHand,p.getUniqueId().toString());
         p.getInventory().setItemInMainHand(itemHand);
 
         return true;

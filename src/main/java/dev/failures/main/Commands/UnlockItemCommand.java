@@ -26,10 +26,10 @@ public class UnlockItemCommand implements CommandExecutor {
         if(p.getInventory().getItemInMainHand().getType() == Material.AIR) return false;
 
         ItemStack itemHand = p.getInventory().getItemInMainHand();
-        PDUtil lockedSlot = new PDUtil(DataKeys.lockedSlot);
+        PDUtil itemOwner = new PDUtil(DataKeys.ITEM_OWNER);
 
-        if(lockedSlot.itemDataContainsKey(itemHand)) {
-            lockedSlot.removeKeyItem(itemHand);
+        if(itemOwner.itemDataContainsKey(itemHand)) {
+            itemOwner.removeKeyItem(itemHand);
             p.sendMessage(ColorUtil.colorize(main.getConfig().getString("item-unlocked-success")));
             return true;
         }

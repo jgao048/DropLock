@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class DropItemListener implements Listener {
     private DropLock main;
@@ -20,6 +21,7 @@ public class DropItemListener implements Listener {
 
     @EventHandler
     private void preventDropping(PlayerDropItemEvent e) {
+        /*
         PDUtil lockedSlot = new PDUtil(DataKeys.lockedSlot);
         Player p = e.getPlayer();
         if(e.getItemDrop().getItemStack().getType() == Material.AIR) return;
@@ -27,6 +29,24 @@ public class DropItemListener implements Listener {
 
         if(!lockedSlot.itemDataContainsKey(itemHand)) return;
         e.setCancelled(true);
+         */
 
+        PDUtil itemOwner = new PDUtil(DataKeys.ITEM_OWNER);
+        PDUtil itemTimer = new PDUtil(DataKeys.ITEM_TIMER);
+        ItemStack droppedItem = e.getItemDrop().getItemStack();
+        itemOwner.setItemDataString(droppedItem,e.getPlayer().getUniqueId().toString());
+        itemTimer.setItemDataInteger(droppedItem,5);
+        new BukkitRunnable() {
+            int counter = 5;
+            public void run() {
+                counter--;
+                if (counter == 0) {
+                    itemTimer.setItemDataInteger(droppedItem,0);
+                    e.getItemDrop().setItemStack(droppedItem);
+                    cancel();
+                }
+            }
+        }.runTaskTimerAsynchronously(main,0,20);
+        e.getItemDrop().setItemStack(droppedItem);
     }
 }

@@ -177,7 +177,6 @@ public class PDUtil {
         PersistentDataContainer ItemData = meta.getPersistentDataContainer();
         ItemData.set(key, PersistentDataType.INTEGER, value);
         item.setItemMeta(meta);
-        DropLock.getInstance().getLogger().info("Saved meta?");
     }
 
     public void setItemDataDouble(ItemStack item, double value) {
@@ -260,7 +259,6 @@ public class PDUtil {
     }
 
     public void addItemDataInteger(ItemStack item, int value) {
-        if (!item.hasItemMeta()) return;
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer ItemData = meta.getPersistentDataContainer();
         if (!ItemData.has(key, PersistentDataType.INTEGER)) return;
@@ -270,7 +268,6 @@ public class PDUtil {
     }
 
     public void addItemDataDouble(ItemStack item, double value) {
-        if (!item.hasItemMeta()) return;
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer ItemData = meta.getPersistentDataContainer();
         if (!ItemData.has(key, PersistentDataType.DOUBLE)) return;

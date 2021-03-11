@@ -5,5 +5,9 @@ api-version: 1.16
 commands:
   lock:
     description: Locks item to the inventory slot.
+  lockall:
+    description: Locks all items in player's inventory.
+  unlockall:
+    description: Unlocks all items in player's inventory.
   unlock:
     description: Unlocks item to allow moving around.

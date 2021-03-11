@@ -1,6 +1,8 @@
 package dev.failures.main;
 
+import dev.failures.main.Commands.LockAllCommand;
 import dev.failures.main.Commands.LockItemCommand;
+import dev.failures.main.Commands.UnlockAllCommand;
 import dev.failures.main.Commands.UnlockItemCommand;
 import dev.failures.main.Listeners.DropItemListener;
 import dev.failures.main.Listeners.InventoryDropListener;
@@ -21,6 +23,8 @@ public final class DropLock extends JavaPlugin {
 
         getCommand("lock").setExecutor(new LockItemCommand(this));
         getCommand("unlock").setExecutor(new UnlockItemCommand(this));
+        getCommand("lockall").setExecutor(new LockAllCommand(this));
+        getCommand("unlockall").setExecutor(new UnlockAllCommand(this));
 
     }
 

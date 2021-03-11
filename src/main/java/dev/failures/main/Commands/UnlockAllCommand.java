@@ -4,18 +4,16 @@ import dev.failures.main.DataKeys;
 import dev.failures.main.DropLock;
 import dev.failures.main.Utils.ColorUtil;
 import dev.failures.main.Utils.PDUtil;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class UnlockItemCommand implements CommandExecutor {
+public class UnlockAllCommand implements CommandExecutor {
     private DropLock main;
 
-    public UnlockItemCommand(DropLock main) {
+    public UnlockAllCommand(DropLock main) {
         this.main = main;
     }
 
@@ -23,18 +21,18 @@ public class UnlockItemCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(!(sender instanceof Player)) return false;
         Player p = (Player) sender;
-        if(p.getInventory().getItemInMainHand().getType() == Material.AIR) return false;
 
-        ItemStack itemHand = p.getInventory().getItemInMainHand();
-        //PDUtil itemOwner = new PDUtil(DataKeys.ITEM_OWNER);
+        int slot = 0;
         PDUtil locked = new PDUtil(DataKeys.LOCKED_SLOT);
-
-        if(locked.itemDataContainsKey(itemHand)) {
-            locked.removeKeyItem(p.getInventory().getItemInMainHand());
-            p.sendMessage(ColorUtil.colorize(main.getConfig().getString("item-unlocked-success")));
-            return true;
+        for(ItemStack item : p.getInventory()) {
+            if(item == null) {
+                slot++;
+                continue;
+            }
+            locked.removeKeyItem(item);
+            slot++;
         }
-        p.sendMessage(ColorUtil.colorize(main.getConfig().getString("item-unlocked-already")));
+        p.sendMessage(ColorUtil.colorize(main.getConfig().getString("item-unlocked-all")));
         return false;
     }
 }

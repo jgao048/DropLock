@@ -1,5 +1,7 @@
 item-locked-already: "&eThis item is already locked to this slot"
 item-locked-success: "&eYou have successfully locked your item to this slot"
+item-locked-all: "&eAll items in your inventory has been locked"
 item-unlocked-already: "&eThis item is already unlocked and can be moved"
 item-unlocked-success: "&eYou have successfully unlocked this item from this slot"
+item-unlocked-all: "&eYou have unlocked all items in your inventory"
 auto-lock: true

@@ -35,9 +35,7 @@ public class LockItemCommand implements CommandExecutor {
             return true;
         }
         p.sendMessage(ColorUtil.colorize(main.getConfig().getString("item-locked-success")));
-        locked.setItemDataInteger(itemHand, p.getInventory().getHeldItemSlot());
-        p.getInventory().setItemInMainHand(itemHand);
-
+        locked.setItemDataInteger(p.getInventory().getItemInMainHand(), p.getInventory().getHeldItemSlot());
         return true;
     }
 }

@@ -20,8 +20,7 @@ public class InventoryDropListener implements Listener {
 
     @EventHandler
     private void dragDrop(InventoryClickEvent e) {
-        /*
-        PDUtil lockedSlot = new PDUtil(DataKeys.lockedSlot);
+        PDUtil lockedSlot = new PDUtil(DataKeys.LOCKED_SLOT);
         Player p = (Player) e.getWhoClicked();
         if(e.getCurrentItem() == null) return;
         if(e.getCurrentItem().getType() == Material.AIR) return;
@@ -29,8 +28,5 @@ public class InventoryDropListener implements Listener {
         ItemStack itemClicked = e.getCurrentItem();
         if(!lockedSlot.itemDataContainsKey(itemClicked)) return;
         e.setCancelled(true);
-         */
-
-
     }
 }

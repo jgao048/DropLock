@@ -18,12 +18,20 @@ public class ItemPickListener implements Listener {
 
     @EventHandler
     private void itemPickup(EntityPickupItemEvent e) {
-        if(!(e.getEntity() instanceof Player)) return;
 
+        if(!(e.getEntity() instanceof Player)) return;
+        Player p = (Player) e.getEntity();
+
+        if(!main.getConfig().getBoolean("auto-lock")) return;
+        PDUtil locked = new PDUtil(DataKeys.LOCKED_SLOT);
+        /*
         PDUtil itemOwner = new PDUtil(DataKeys.ITEM_OWNER);
         ItemStack pickedItem = e.getItem().getItemStack();
         if(!itemOwner.itemDataContainsKey(pickedItem)) return;
         if(itemOwner.getItemDataString(pickedItem).equals(e.getEntity().getUniqueId().toString())) return;
         e.setCancelled(true);
+        */
+        ItemStack pickedItem = e.getItem().getItemStack();
+        locked.setItemDataInteger(pickedItem, p.getInventory().getHeldItemSlot());
     }
 }

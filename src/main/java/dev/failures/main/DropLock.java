@@ -6,7 +6,6 @@ import dev.failures.main.Commands.UnlockAllCommand;
 import dev.failures.main.Commands.UnlockItemCommand;
 import dev.failures.main.Listeners.DropItemListener;
 import dev.failures.main.Listeners.InventoryDropListener;
-import dev.failures.main.Listeners.ItemPickListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class DropLock extends JavaPlugin {
@@ -17,8 +16,7 @@ public final class DropLock extends JavaPlugin {
         instance = this;
         saveDefaultConfig();
 
-        getServer().getPluginManager().registerEvents(new InventoryDropListener(this),this);
-        getServer().getPluginManager().registerEvents(new ItemPickListener(this),this);
+        //getServer().getPluginManager().registerEvents(new InventoryDropListener(this),this);
         getServer().getPluginManager().registerEvents(new DropItemListener(this),this);
 
         getCommand("lock").setExecutor(new LockItemCommand(this));

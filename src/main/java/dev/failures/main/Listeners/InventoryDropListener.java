@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 
 public class InventoryDropListener implements Listener {
@@ -20,13 +21,14 @@ public class InventoryDropListener implements Listener {
 
     @EventHandler
     private void dragDrop(InventoryClickEvent e) {
-        PDUtil lockedSlot = new PDUtil(DataKeys.LOCKED_SLOT);
+        PDUtil lockedSlot = new PDUtil(DataKeys.LOCKED_STATUS);
         Player p = (Player) e.getWhoClicked();
         if(e.getCurrentItem() == null) return;
+        if(!e.getClickedInventory().getType().equals(InventoryType.PLAYER)) return;
         if(e.getCurrentItem().getType() == Material.AIR) return;
 
         ItemStack itemClicked = e.getCurrentItem();
-        if(!lockedSlot.itemDataContainsKey(itemClicked)) return;
+        if(!lockedSlot.getItemDataString(itemClicked).equals("LOCKED")) return;
         e.setCancelled(true);
     }
 }

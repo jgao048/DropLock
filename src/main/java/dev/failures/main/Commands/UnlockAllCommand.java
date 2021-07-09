@@ -23,13 +23,16 @@ public class UnlockAllCommand implements CommandExecutor {
         Player p = (Player) sender;
 
         int slot = 0;
-        PDUtil locked = new PDUtil(DataKeys.LOCKED_SLOT);
+        ItemStack itemHand = p.getInventory().getItemInMainHand().clone();
+        PDUtil itemStatus = new PDUtil(DataKeys.LOCKED_STATUS);
         for(ItemStack item : p.getInventory()) {
             if(item == null) {
                 slot++;
                 continue;
             }
-            locked.removeKeyItem(item);
+            //itemStatus.setItemDataString(p.getInventory().getItem(slot), "UNLOCKED");
+            itemStatus.removeKeyItem(item);
+            p.getInventory().setItem(slot, item);
             slot++;
         }
         p.sendMessage(ColorUtil.colorize(main.getConfig().getString("item-unlocked-all")));

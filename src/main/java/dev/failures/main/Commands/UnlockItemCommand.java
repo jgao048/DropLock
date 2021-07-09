@@ -25,15 +25,17 @@ public class UnlockItemCommand implements CommandExecutor {
         Player p = (Player) sender;
         if(p.getInventory().getItemInMainHand().getType() == Material.AIR) return false;
 
-        ItemStack itemHand = p.getInventory().getItemInMainHand();
-        //PDUtil itemOwner = new PDUtil(DataKeys.ITEM_OWNER);
-        PDUtil locked = new PDUtil(DataKeys.LOCKED_SLOT);
+        PDUtil itemStatus = new PDUtil(DataKeys.LOCKED_STATUS);
+        ItemStack itemHand = p.getInventory().getItemInMainHand().clone();
 
-        if(locked.itemDataContainsKey(itemHand)) {
-            locked.removeKeyItem(p.getInventory().getItemInMainHand());
+        if(itemStatus.getItemDataString(p.getInventory().getItemInMainHand()).equals("LOCKED")) {
+            //itemStatus.setItemDataString(p.getInventory().getItemInMainHand(), "UNLOCKED");
+            itemStatus.removeKeyItem(itemHand);
+            p.getInventory().setItemInMainHand(itemHand);
             p.sendMessage(ColorUtil.colorize(main.getConfig().getString("item-unlocked-success")));
             return true;
         }
+
         p.sendMessage(ColorUtil.colorize(main.getConfig().getString("item-unlocked-already")));
         return false;
     }

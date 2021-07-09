@@ -23,13 +23,14 @@ public class LockAllCommand implements CommandExecutor {
         Player p = (Player) sender;
 
         int slot = 0;
-        PDUtil locked = new PDUtil(DataKeys.LOCKED_SLOT);
+        PDUtil itemStatus = new PDUtil(DataKeys.LOCKED_STATUS);
         for(ItemStack item : p.getInventory()) {
             if(item == null) {
                 slot++;
                 continue;
             }
-            locked.setItemDataInteger(item,slot);
+            itemStatus.setItemDataString(item, "LOCKED");
+            p.getInventory().setItem(slot, item);
             slot++;
         }
         p.sendMessage(ColorUtil.colorize(main.getConfig().getString("item-locked-all")));

@@ -19,12 +19,12 @@ public class DropItemListener implements Listener {
 
     @EventHandler
     private void preventDropping(PlayerDropItemEvent e) {
-        PDUtil lockedSlot = new PDUtil(DataKeys.LOCKED_SLOT);
+        PDUtil itemStatus = new PDUtil(DataKeys.LOCKED_STATUS);
         Player p = e.getPlayer();
         if (e.getItemDrop().getItemStack().getType() == Material.AIR) return;
+        ItemStack itemHand = e.getItemDrop().getItemStack().clone();
 
-        ItemStack itemHand = e.getItemDrop().getItemStack();
-        if (!lockedSlot.itemDataContainsKey(itemHand)) return;
+        if (!itemStatus.getItemDataString(itemHand).equals("LOCKED")) return;
         e.setCancelled(true);
     }
 }
